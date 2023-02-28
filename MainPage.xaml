@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoApp_ProjectV2.MainPage">
+    <Grid 
+        
+        ColumnSpacing="3"
+        RowSpacing="3">
+
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <BoxView Grid.Column="0" Grid.Row="0"  />
+        <Button x:Name="TestButton" Clicked="SqlTester" Text="im a test Button" WidthRequest="300" HorizontalOptions="Start" />
+
+        <BoxView Grid.Column="1" Grid.Row="0"  />
+        <ImageButton Grid.Column="1" Grid.Row="0"
+                     WidthRequest="60"
+                     HeightRequest="60"
+                     CornerRadius="45"
+                     HorizontalOptions="End"
+                     Margin="10"
+                     Source="missingprofileimage.png"
+                     ZIndex="2"
+                     Clicked="OpenUserOptions"/>
+
+
+
+        <BoxView Grid.Column="1" Grid.Row="1" />
+        <Label  Grid.Column="1" Grid.Row="1" x:Name="todayDate" Margin="10" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center"/>
+
+
+
+        <BoxView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1"  />
+        <HorizontalStackLayout Grid.Column="0" Grid.Row="1" HorizontalOptions="End" ZIndex="3">
+            <ImageButton Source="editicon.png" x:Name="editButton"  WidthRequest="30" HeightRequest="30"/>
+            <ImageButton Source="plusicon.png" x:Name="addButton" Clicked="OpenOrCloseNewTaskWindow" WidthRequest="30" HeightRequest="30" Margin="5"/>
+        </HorizontalStackLayout>
+
+
+        <BoxView Grid.Column="0" Grid.Row="2" MinimumHeightRequest="500"  />
+
+
+
+        <!--Defaul Task For Testing-->
+        <ScrollView Grid.Column="0" Grid.Row="2">
+            <VerticalStackLayout x:Name="TasksStackLayout" Spacing="5" Margin="4" >
+                <!--<VerticalStackLayout >
+
+                    <Grid  ColumnDefinitions="5*,2*" RowDefinitions="150">
+                        <ScrollView>
+
+                            <HorizontalStackLayout>
+
+                                --><!--<BoxView WidthRequest="50" Color="Red" />--><!--
+                                <ImageButton Source="trash.png" IsVisible="true" WidthRequest="60" Padding="10" />
+                                <VerticalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label IsVisible="false" Text="Go to the post office"  Margin="15,15,5,15" FontSize="34" />
+                                        <Entry IsVisible="true" Placeholder="New Title" FontSize="34" Margin="10,10,5,10"/>
+                                        <ImageButton IsVisible="true" Source="editicon.png" WidthRequest="40" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label IsVisible="false" Text="To pick up package number 53FE412"  Margin="15,15,5,15" />
+                                        <Entry IsVisible="true" Placeholder="New Title"  Margin="10,10,5,10"/>
+                                        <ImageButton IsVisible="true" Source="editicon.png" WidthRequest="30"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </ScrollView>
+
+                        <HorizontalStackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End" Spacing="20">
+                            <ImageButton IsVisible="true" Source="editicon.png" Clicked="EditTaskButtonClick" WidthRequest="40"/>
+                            <VerticalStackLayout HorizontalOptions="Center">
+                                <Label IsVisible="false" Text="12:30 - 15:35" HorizontalOptions="Center"/>
+                                <Label IsVisible="false" Text="15/10/2022" HorizontalOptions="Center"/>
+                                <Entry IsVisible="true" Placeholder="Start Time" />
+                                <Entry IsVisible="true" Placeholder="End Time" />
+                                <DatePicker IsVisible="true" MinimumDate="01/01/2022" Date="{Binding todayDate.Text}" />
+                            </VerticalStackLayout>
+                            <ImageButton IsVisible="false" Source="editicon.png" Clicked="EditTaskButtonClick" WidthRequest="48" Padding="5" />
+
+                            <ImageButton x:Name="ShadowTest" IsVisible="true" Source="save.png" Clicked="EditTaskButtonClick" WidthRequest="48" Padding="5"  HorizontalOptions="FillAndExpand" >
+                                <ImageButton.Shadow>
+                                    <Shadow Brush="Black"  Opacity="0.8"/> --><!--Offset="5,5"--><!--
+                                </ImageButton.Shadow>
+                            </ImageButton>
+                        </HorizontalStackLayout>
+
+                    </Grid>
+                </VerticalStackLayout>-->
+            </VerticalStackLayout>
+        </ScrollView>
+        <BoxView Grid.Column="2" Grid.Row="2"  />
+        <Label Grid.Column="2" Grid.Row="2" Text="Column 2 row 2" VerticalOptions="End" HorizontalOptions="End" />
+
+
+        <!--Time Schedule For Today-->
+        <ScrollView Grid.Column="2" Grid.Row="2">
+            <VerticalStackLayout Grid.Column="2" Grid.Row="2" x:Name="todaySchedule" Padding="10"/>
+        </ScrollView>
+
+        <!--The Form For Creating New Tasks-->
+        <AbsoluteLayout x:Name="newToDoForm" IsVisible="false" Grid.Column="0" Grid.Row="1" HorizontalOptions="End">
+            <BoxView x:Name="boxy" WidthRequest="300"  HeightRequest="405"  CornerRadius="5"/>
+            <VerticalStackLayout x:Name="hey" WidthRequest="298" Padding="3">
+
+                <Label Text="Create New Task" FontSize="20" FontAttributes="Bold" Margin="0,5" ></Label>
+
+                <VerticalStackLayout Margin="5,0">
+                    <Label x:Name="TitleBox" Text="Enter Title:" Margin="0,5,0,0"></Label>
+                    <Entry x:Name="TaskTitle" Placeholder="enter here"  />
+                </VerticalStackLayout>
+
+
+                <VerticalStackLayout Margin="5,0">
+                    <Label Text="Enter Description:"  Margin="0,5,0,0"></Label>
+                    <Entry x:Name="TaskDescription" Placeholder="enter here"  />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="5,0">
+                    <Label Text="Select Date:"  Margin="0,10,0,0"></Label>
+                    <DatePicker x:Name="TaskDate" Format="dd/MM/yyyy" MinimumDate="01/01/2022" Date="{Binding todayDate.Text}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="5,0">
+                    <Label Text="Select Start Time:"  Margin="0,10,0,0"></Label>
+                    <TimePicker x:Name="TaskStartTime" Format="HH:mm"  />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="5,4">
+                    <Label Text="Select End Time:"  Margin="0,10,0,0"></Label>
+                    <TimePicker x:Name="TaskEndTime" Format="HH:mm"   />
+                </VerticalStackLayout>
+
+                <Button Text="Create" Clicked="CreateNewTaskClick" HorizontalOptions="FillAndExpand"  Margin="2,0"/>
+            </VerticalStackLayout>
+
+        </AbsoluteLayout>
+
+        <!--User Option Window-->
+        <AbsoluteLayout x:Name="userOptions"  IsVisible="false" Grid.Column="1" Grid.Row="0" HorizontalOptions="End" ZIndex="1">
+            <BoxView  WidthRequest="320" HeightRequest="200" CornerRadius="25,0,9,25"/>
+            <Grid
+                WidthRequest="316"
+                HeightRequest="194">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <HorizontalStackLayout HeightRequest="80" VerticalOptions="Start" >
+                    <HorizontalStackLayout>
+                        <ScrollView  x:Name="UserScrollView" Orientation="Horizontal" WidthRequest="240" Grid.Row="0">
+                            <VerticalStackLayout WidthRequest="250" Padding="10,5" >
+                                <HorizontalStackLayout>
+                                    <VerticalStackLayout>
+                                        <Label x:Name="UserName_Label" Text="Heccccccccy User" FontSize="30"/>
+                                        <Label x:Name="UserEmail_Label" Text="Emddddddddddddddddddddddddddddddail"/>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </ScrollView>
+                        <BoxView WidthRequest="160" Opacity="0"/>
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout VerticalOptions="EndAndExpand" Grid.Row="1">
+                    <Button Text="Logout" Clicked="LogOut"/>
+                </VerticalStackLayout>
+            </Grid>
+        </AbsoluteLayout>
+
+
+
+
+
+
+
+    </Grid>
+
+
+
+
+</ContentPage>

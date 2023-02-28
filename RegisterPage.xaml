@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoApp_ProjectV2.RegisterPage"
+             Title="RegisterPage">
+    <Grid BackgroundColor="White"
+        ColumnSpacing="3"
+        RowSpacing="3">
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <BoxView Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" ZIndex="0"  CornerRadius="35" />
+        <BoxView x:Name="RegisterView" Grid.Column="2" Grid.Row="2" ZIndex="2"   CornerRadius="35" />
+        <VerticalStackLayout x:Name="RegisterStack" Grid.Column="2" Grid.Row="2" ZIndex="2" Padding="30" >
+            <Image Source="comingsoon.png" HeightRequest="60" />
+            <Label Text="Register" HorizontalOptions="Center" FontSize="30"/>
+            <Label Text="Email:" FontSize="30"/>
+            <Entry x:Name="RegisterEmail" Unfocused="EmailCheck_Unfocused" IsSpellCheckEnabled="False" Placeholder="example@gmail.com" BackgroundColor="White" TextColor="Gray"/>
+            <Label x:Name="InvalidEmail" IsVisible="false" Text="* Invalid Email" FontSize="12" TextColor="Red"/>
+            <Label x:Name="AlreadyRegisteredLabel" IsVisible="false" Text="Email Already Registered" TextColor="Red"/>
+            <Label Text="Password:" FontSize="30"/>
+            <Entry x:Name="RegisterPassword"  Unfocused="PasswordCheck_Unfocused" Placeholder="examplePassword123" IsPassword="True" BackgroundColor="White" TextColor="Gray"/>
+            <VerticalStackLayout x:Name="PasswordRequirement" IsVisible="false" Margin="0,5,0,0">
+                <Label Text="* Password Must Be At Least 8 Character Long" FontSize="12" TextColor="Red"/>
+                <Label Text="* Password Must Contain At Least 1 Upper Case Letter" FontSize="12" TextColor="Red"/>
+                <Label Text="* Password Must Contain At Least 1 Special Character" FontSize="12" TextColor="Red"/>
+            </VerticalStackLayout>
+            <HorizontalStackLayout Margin="0,10">
+                <VerticalStackLayout  MinimumWidthRequest="100">
+                    <Label Text="First Name" HorizontalOptions="Center"/>
+                    <Entry x:Name="fNameEntry" Text=""  Margin="5,0"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout MinimumWidthRequest="100">
+                    <Label Text="Last Name"  Margin="5,0" HorizontalOptions="Center"/>
+                    <Entry x:Name="lNameEntry" Text=""/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout  >
+                <Label Text="Gender:" VerticalOptions="Center"/>
+                <Picker x:Name="picker" SelectedIndex="0" Margin="10,0" >
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Other</x:String>
+                            <x:String>Male</x:String>
+                            <x:String>Female</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </HorizontalStackLayout>
+            <Button Text="Register" Clicked="OnRegister_Click" Margin="5,20,5,0"/>
+            <Button Text="Already have an account?" Clicked="HasAnAccount_Click" TextColor="#0000EE"  Opacity="0.4" HorizontalOptions="Start" WidthRequest="220"/>
+        </VerticalStackLayout>
+        <ActivityIndicator x:Name="LoadingCircle" IsVisible="false" ZIndex="4" Grid.Row="2" Grid.Column="2" IsRunning="True" WidthRequest="150" HeightRequest="150" />
+    </Grid>
+</ContentPage>

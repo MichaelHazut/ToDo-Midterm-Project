@@ -1,0 +1,101 @@
+using ToDoApp_ProjectV2.Models;
+
+namespace ToDoApp_ProjectV2;
+
+public partial class RegisterPage : ContentPage
+{
+    List<char> SpecialCharacters = new List<char>() { '!', '@', '#', '$', '%', '^', '&', '*' };
+    public RegisterPage()
+	{
+		InitializeComponent();
+        picker.SelectedIndex = 0;
+
+    }
+    async void OnRegister_Click(object sender, EventArgs e)
+    {
+        Console.WriteLine("test test");
+        LoadingCircle.IsVisible = true;
+        EmailCheck_Unfocused(sender, e);
+        PasswordCheck_Unfocused(sender, e);
+        if (InvalidEmail.IsVisible == true || PasswordRequirement.IsVisible == true)
+        {
+            await DisplayAlert("Invalid Data", "Email or Password Are Invalid", "Close");
+            LoadingCircle.IsVisible = false;
+            return;
+        }
+        string email = RegisterEmail.Text.Replace(" ", String.Empty);
+        if (User.UserCheckIfExist(email))
+        {
+            AlreadyRegisteredLabel.IsVisible = true;
+            LoadingCircle.IsVisible = false;
+            return;
+        }
+        try
+        {
+            User newUser = new User(
+                RegisterEmail.Text,
+                RegisterPassword.Text,
+                fNameEntry.Text,
+                lNameEntry.Text
+                );
+            newUser.SqlCreate();
+            LoadingCircle.IsVisible = false;
+            await DisplayAlert("Success", "User Created Succsesfully", "Continue");
+            Navigation.PushAsync(new LoginPage(newUser.Email));
+
+        }
+        catch (Exception){  }
+    }
+    void EmailCheck_Unfocused(object sender, EventArgs e)
+    {
+        try
+        {
+            string email = RegisterEmail.Text;
+            var mailAddress = new System.Net.Mail.MailAddress(email);
+            if (mailAddress.Address == email)
+            {
+                bool isEmail = email.ToList().Any(c => c == '.' && c != email[email.Length - 1]);
+                if (!isEmail)
+                {
+                    throw new Exception("Not An Email");
+                }
+            }
+            InvalidEmail.IsVisible = false;
+        }
+        catch
+        {
+            InvalidEmail.IsVisible = true;
+        }
+
+    }
+    void PasswordCheck_Unfocused(object sender, EventArgs e)
+    {
+        try
+        {
+            List<char> passList = RegisterPassword.Text.ToList();
+            bool isSpecial = passList.Any(x => SpecialCharacters.Contains(x));
+            bool isUpperCase = passList.Any(x => char.IsLetter(x) && char.IsUpper(x));
+            if (passList.Count > 7 && isSpecial && isUpperCase)
+            {
+                PasswordRequirement.IsVisible = false;
+                return;
+            }
+            InvalidPasswordView();
+        }
+        catch
+        {
+            InvalidPasswordView();
+        }
+    }
+    void InvalidPasswordView()
+    {
+        PasswordRequirement.IsVisible = true;
+
+    }
+    void HasAnAccount_Click(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new LoginPage());
+    }
+
+
+}

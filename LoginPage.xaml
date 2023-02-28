@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoApp_ProjectV2.LoginPage"
+             Title="LoginPage"
+              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    
+    <Grid 
+        
+        ColumnSpacing="3"
+        RowSpacing="3">
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <BoxView Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" ZIndex="0"  CornerRadius="35" />
+        <BoxView x:Name="LoginBoxView" Grid.Column="2" Grid.Row="2"  ZIndex="1" MinimumWidthRequest="200"  CornerRadius="35"/>
+        <VerticalStackLayout x:Name="LoginStack" ZIndex="1" Grid.Column="2" Grid.Row="2"  Padding="30"  >
+            <Image Source="comingsoon.png" HeightRequest="60" />
+            <Label Text="Login" HorizontalOptions="Center" FontSize="30"/>
+            <Label Text="Email:" FontSize="30"/>
+            <Entry x:Name="EmailEntry" Placeholder="example@gmail.com"     Text="michael@gmail.com"  />
+            <Label Text="Password:" FontSize="30"/>
+            <Entry x:Name="PasswordEntry" Placeholder="examplePassword123" Text="!A123456" IsPassword="True"  />
+            <Label x:Name="InvalidInput" IsVisible="false" Text="Email or Password Is Incorrect." FontSize="16"/>
+            <Button Text="submit" Clicked="OnLogin_Click" Margin="5,20,5,0"/>
+            <HorizontalStackLayout>
+                <Label Text="Stay logged in"/>
+            </HorizontalStackLayout>
+            <Button Text="New User?" Clicked="NewUser_Click" Opacity="0.4" HorizontalOptions="Start" WidthRequest="110"/>
+            <Button />
+        </VerticalStackLayout>
+
+
+    </Grid>
+    <ContentPage.Resources>
+        <Style x:Key="style1"
+               TargetType="Entry">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="style2"
+               TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+            <Setter Property="HorizontalTextAlignment" Value="Start" />
+        </Style>
+    </ContentPage.Resources>
+</ContentPage>

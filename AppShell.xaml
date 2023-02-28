@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ToDoApp_ProjectV2.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ToDoApp_ProjectV2"
+    Shell.FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="LightGray">
+
+    <!--<ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />-->
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="50,*" Padding="10">
+                <Image Source="{Binding Icon}"/>
+                <Label Grid.Column="1" Text="{Binding Title}" TextColor="Black" FontAttributes="Bold"/>
+            </Grid>
+        </DataTemplate>    
+    </Shell.ItemTemplate>
+
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="50,*" Padding="10">
+                <Image Source="{Binding Icon}"/>
+                <Label Grid.Column="1" Text="{Binding Title}" TextColor="White" FontAttributes="Bold"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+    
+    <FlyoutItem Title="Login">
+        <ShellContent Title="Login" ContentTemplate="{DataTemplate local:LoginPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Home">
+        <ShellContent Title="Home"  ContentTemplate="{DataTemplate local:MainPage}"/>
+    </FlyoutItem>
+    
+
+</Shell>
